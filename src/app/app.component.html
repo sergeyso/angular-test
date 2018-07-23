@@ -1,0 +1,35 @@
+<div class="container pt-3">
+    <div class="row">
+        <h1 class="mb-4">
+            Messages
+        </h1>
+        <div class="w-100">
+          <div>
+            <ul class="message-list list-group" *ngIf="messages.length > 0; else noMessages">
+                <li 
+                    class="d-flex justify-content-between mb-4"
+                    *ngFor="let message of messages">
+                        <div class="chat-body white p-3 ml-2 col-md-12">
+                            <div class="header">
+                                <strong class="primary-font"><i class="fa fa-user-circle-o"></i> Unkonown Sender</strong>
+                                <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> Expiry date: {{ message.expiration_date | amDateFormat: 'YYYY-MM-DD HH:mm:ss' }}</small>
+                            </div>
+                            <hr class="w-100">
+                            <p class="mb-0">
+                                <span *ngIf="message.type === 'image';else textMessage">
+                                    <img class="img-fluid img-thumbnail" [src]="message.message" >
+                                </span>
+                                <ng-template #textMessage>
+                                    {{ message.message }}
+                                </ng-template>
+                            </p>
+                        </div>
+                </li>
+            </ul>
+          </div>
+          <ng-template #noMessages>
+            <h4>Messages not found.</h4>
+          </ng-template>
+        </div>
+    </div>
+</div>
